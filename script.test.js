@@ -1,20 +1,27 @@
-const googleSearch = require('./script')
+const googleSearch = require("./script");
 
-MockDb = [
-  'dog.com',
-  'cheese_puff.com',
-  'disney.com',
-  'dog_pictures.com'
-]
+MockDb = ["dog.com", "cheese_puff.com", "disney.com", "dog_pictures.com"];
 
-it("this is a simply test", () => {
-  expect('hello').toBe('hello')
-  // expect('hello').toBe('hello')
-  // googleSearch('testtest', MockDb)
-});
+describe("googleSearch", () => {
+  it("this is a simply test", () => {
+    expect("hello").toBe("hello");
+  });
 
-it("this is searching google test", () => {
-  expect(googleSearch('testtest', MockDb)).toEqual([])
-  expect(googleSearch('dog', MockDb)).toEqual(['dog.com','dog_pictures.com'])
-  // expect(googleSearch('dg', MockDb)).toEqual(['dog.com','dog_pictures.com'])
+  it("this is searching google test", () => {
+    expect(googleSearch("testest", MockDb)).toEqual([]);
+    expect(googleSearch("dog", MockDb)).toEqual([
+      "dog.com",
+      "dog_pictures.com",
+    ]);
+  });
+
+  it("work with undefined and null", () => {
+    expect(googleSearch(undefined, MockDb)).toEqual([]);
+    expect(googleSearch(null, MockDb)).toEqual([]);
+  });
+
+  it("does not return more than 3 matches", () => {
+    expect(googleSearch(".com", MockDb).length).toEqual(3);
+    // expect(googleSearch('.com', MockDb).length).toEqual(4)
+  });
 });
